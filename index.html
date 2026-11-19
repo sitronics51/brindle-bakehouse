@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brindle Bakehouse — Small-batch bread & pastry</title>
+<meta name="description" content="Brindle Bakehouse: sourdough, pastry and coffee baked fresh every morning. Concept website.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf5ec; --paper:#f4e9d8; --crust:#b5652b; --crust-dark:#8a4519;
+    --ink:#2a1d14; --muted:#6e5b4c; --line:#e5d6c1; --sage:#6f8460;
+    --radius:18px; --max:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.1;letter-spacing:-.01em}
+  .eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--crust)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.5rem;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--ink);transition:transform .15s ease, background .15s ease, color .15s ease;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .btn-primary{background:var(--ink);color:var(--cream)}
+  .btn-primary:hover{background:var(--crust-dark);border-color:var(--crust-dark)}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--cream)}
+  .btn:active{transform:translateY(1px)}
+  :focus-visible{outline:3px solid var(--crust);outline-offset:3px;border-radius:6px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(251,245,236,.88);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+  header.scrolled{border-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:.6rem;font-family:Fraunces,serif;font-weight:800;font-size:1.25rem;text-decoration:none}
+  .logo-mark{width:34px;height:34px}
+  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+  .nav-links a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--muted);transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links .btn{padding:.6rem 1.1rem;color:var(--cream)}
+  .menu-toggle{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer}
+  .menu-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px auto;transition:transform .2s, opacity .2s}
+
+  /* Hero */
+  .hero{padding:72px 0 96px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;margin:.8rem 0 1.2rem}
+  .hero h1 em{font-style:italic;font-weight:400;color:var(--crust)}
+  .hero p.lead{font-size:1.15rem;color:var(--muted);max-width:30rem;margin-bottom:2rem}
+  .hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+  .hero-meta{display:flex;gap:2rem;margin-top:2.6rem;flex-wrap:wrap}
+  .hero-meta div{font-size:.88rem;color:var(--muted)}
+  .hero-meta strong{display:block;font-family:Fraunces,serif;font-size:1.6rem;color:var(--ink)}
+  .hero-art{position:relative;aspect-ratio:1/1;border-radius:50% 50% var(--radius) var(--radius);background:var(--paper);display:grid;place-items:center}
+  .hero-art svg{width:82%}
+  .badge{position:absolute;left:-18px;bottom:40px;background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem;box-shadow:0 12px 30px -12px rgba(42,29,20,.25);font-size:.85rem}
+  .badge strong{display:block;font-size:.95rem}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sage);margin-right:6px;animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.35}}
+
+  /* Sections */
+  section{padding:96px 0}
+  .section-head{max-width:36rem;margin-bottom:3rem}
+  .section-head h2{font-size:clamp(2rem,4vw,3rem);margin-top:.6rem}
+  .section-head p{color:var(--muted);margin-top:1rem}
+
+  /* Menu */
+  #menu{background:var(--paper)}
+  .tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+  .tab{border:1.5px solid var(--line);background:var(--cream);padding:.55rem 1.2rem;border-radius:999px;font:inherit;font-weight:500;font-size:.9rem;cursor:pointer;color:var(--muted);transition:all .15s}
+  .tab[aria-selected="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+  .item{background:var(--cream);border-radius:var(--radius);padding:1.4rem;border:1px solid var(--line);transition:transform .2s, box-shadow .2s}
+  .item:hover{transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(42,29,20,.35)}
+  .item-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+  .item h3{font-size:1.2rem}
+  .price{font-weight:600;color:var(--crust-dark)}
+  .item p{color:var(--muted);font-size:.92rem;margin-top:.4rem}
+  .tag{display:inline-block;margin-top:.8rem;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);background:#e9eee3;padding:.2rem .6rem;border-radius:999px}
+  [hidden]{display:none!important}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .about-art{border-radius:var(--radius);background:var(--ink);aspect-ratio:4/5;display:grid;place-items:center;position:relative;overflow:hidden}
+  .about-art svg{width:70%}
+  .about p{color:var(--muted);margin-bottom:1rem}
+  .values{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
+  .value{border-top:2px solid var(--ink);padding-top:.9rem}
+  .value h3{font-size:1.05rem;margin-bottom:.3rem}
+  .value p{font-size:.9rem;margin:0}
+
+  /* Reviews */
+  #reviews{background:var(--ink);color:var(--cream)}
+  #reviews .eyebrow{color:#e0a676}
+  #reviews .section-head p{color:#c9b8a6}
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{border:1px solid #4a3a2e;border-radius:var(--radius);padding:1.6rem}
+  .stars{color:#e0a676;letter-spacing:.15em;margin-bottom:.8rem}
+  .review blockquote{font-family:Fraunces,serif;font-size:1.15rem;line-height:1.4}
+  .review cite{display:block;margin-top:1rem;font-style:normal;font-size:.88rem;color:#c9b8a6}
+
+  /* Visit */
+  .visit-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px}
+  .hours{list-style:none;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff8ef}
+  .hours li{display:flex;justify-content:space-between;padding:.9rem 1.2rem;border-bottom:1px solid var(--line);font-size:.95rem}
+  .hours li:last-child{border-bottom:0}
+  .hours li.today{background:var(--paper);font-weight:600}
+  .contact-lines{margin-top:1.6rem;display:grid;gap:.5rem;color:var(--muted)}
+  .contact-lines strong{color:var(--ink)}
+  form{background:#fff8ef;border:1px solid var(--line);border-radius:var(--radius);padding:2rem;display:grid;gap:1rem}
+  form h3{font-size:1.5rem}
+  .field{display:grid;gap:.35rem}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  label{font-size:.85rem;font-weight:600}
+  input,select,textarea{font:inherit;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:12px;background:var(--cream);color:var(--ink);width:100%}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--crust)}
+  .error{font-size:.8rem;color:#b3261e;min-height:1em}
+  .field.invalid input,.field.invalid select{border-color:#b3261e}
+  .success{display:none;background:#e9eee3;color:#3d4d33;padding:1rem;border-radius:12px;font-weight:500}
+  .success.show{display:block}
+
+  footer{border-top:1px solid var(--line);padding:2rem 0;font-size:.85rem;color:var(--muted)}
+  .foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.dot{animation:none}}
+
+  /* Responsive */
+  @media (max-width:900px){
+    .hero-grid,.about-grid,.visit-grid{grid-template-columns:1fr;gap:40px}
+    .hero{padding:40px 0 72px}
+    .hero-art{max-width:420px;margin:0 auto;width:100%}
+    .reviews{grid-template-columns:1fr}
+    section{padding:72px 0}
+    .about-art{aspect-ratio:16/10}
+  }
+  @media (max-width:760px){
+    .menu-toggle{display:block}
+    .nav-links{position:fixed;inset:72px 0 auto 0;flex-direction:column;gap:0;background:var(--cream);border-bottom:1px solid var(--line);padding:.5rem 24px 1.5rem;transform:translateY(-120%);transition:transform .25s ease;align-items:stretch}
+    .nav-links.open{transform:none}
+    .nav-links li a{display:block;padding:.9rem 0;border-bottom:1px solid var(--line)}
+    .nav-links li:last-child a{border:2px solid var(--ink);margin-top:1rem;justify-content:center}
+    .menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+    .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .row,.values{grid-template-columns:1fr}
+    .badge{left:8px;bottom:16px}
+    .hero-meta{gap:1.4rem}
+    .hero-meta strong{font-size:1.35rem}
+  }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <nav class="wrap nav" aria-label="Main">
+    <a href="#top" class="logo" aria-label="Brindle Bakehouse home">
+      <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#2a1d14"/><path d="M9 24c0-7 5-12 11-12s11 5 11 12c0 2-1 3-3 3H12c-2 0-3-1-3-3z" fill="#e0a676"/><path d="M15 17l2 6M20 15v8M25 17l-2 6" stroke="#8a4519" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Brindle
+    </a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">Our story</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#visit" class="btn btn-primary">Order ahead</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">Neighborhood bakery · Est. 2019</span>
+        <h1>Bread worth <em>waking up</em> for.</h1>
+        <p class="lead">Slow-fermented sourdough, buttery laminated pastry and honest coffee — baked in small batches every morning, sold until it's gone.</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-primary">See today's menu →</a>
+          <a href="#visit" class="btn btn-ghost">Find us</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>36h</strong>sourdough ferment</div>
+          <div><strong>6:30</strong>doors open daily</div>
+          <div><strong>100%</strong>local flour</div>
+        </div>
+      </div>
+      <div class="hero-art reveal" aria-hidden="true">
+        <svg viewBox="0 0 320 260">
+          <ellipse cx="160" cy="228" rx="130" ry="14" fill="#e5d6c1"/>
+          <path d="M40 190c0-70 54-120 120-120s120 50 120 120c0 18-10 30-30 30H70c-20 0-30-12-30-30z" fill="#c9783b"/>
+          <path d="M52 186c0-60 48-104 108-104s108 44 108 104" fill="none" stroke="#e7a56d" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+          <path d="M100 118c10 18 14 40 12 64M160 96v86M220 118c-10 18-14 40-12 64" stroke="#8a4519" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M100 118c10 18 14 40 12 64M160 96v86M220 118c-10 18-14 40-12 64" stroke="#f3d3ae" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <circle cx="70" cy="60" r="3" fill="#b5652b"/><circle cx="262" cy="52" r="4" fill="#b5652b"/><circle cx="240" cy="30" r="2.5" fill="#b5652b"/>
+        </svg>
+        <div class="badge"><span class="dot"></span><strong>Fresh out of the oven</strong>Country loaf · 7:15 am</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Today's bake</span>
+        <h2>Made by hand, from scratch.</h2>
+        <p>Our menu changes with the seasons. Here's what's on the counter this week.</p>
+      </div>
+      <div class="tabs reveal" role="tablist" aria-label="Menu categories">
+        <button class="tab" role="tab" aria-selected="true" data-filter="all">All</button>
+        <button class="tab" role="tab" aria-selected="false" data-filter="bread">Bread</button>
+        <button class="tab" role="tab" aria-selected="false" data-filter="pastry">Pastry</button>
+        <button class="tab" role="tab" aria-selected="false" data-filter="coffee">Coffee</button>
+      </div>
+      <div class="menu-grid" id="menu-grid"></div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="wrap about-grid">
+      <div class="about-art reveal" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#4a3a2e" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="#4a3a2e" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <path d="M70 120c0-22 13-38 30-38s30 16 30 38" fill="#e0a676"/>
+          <rect x="62" y="118" width="76" height="10" rx="5" fill="#b5652b"/>
+          <path d="M100 70c-6-8-2-18 6-20M92 66c-4-6-1-12 4-14" stroke="#e0a676" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <text x="100" y="160" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#c9b8a6" letter-spacing="3">SINCE 2019</text>
+        </svg>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Our story</span>
+        <h2 style="font-size:clamp(2rem,4vw,3rem);margin:.6rem 0 1.4rem">A tiny oven, a big obsession.</h2>
+        <p>Brindle started with one stubborn sourdough starter and a borrowed oven. Today we bake for the whole neighborhood — but the method hasn't changed: real ingredients, long fermentation, and no shortcuts.</p>
+        <p>Everything leaving our kitchen is made the same morning you buy it. What doesn't sell goes to the community fridge down the street.</p>
+        <div class="values">
+          <div class="value"><h3>Local grain</h3><p>Flour milled within 80 km of the shop.</p></div>
+          <div class="value"><h3>Zero waste</h3><p>Leftovers are donated, never binned.</p></div>
+          <div class="value"><h3>Slow by design</h3><p>Time does the work, not additives.</p></div>
+          <div class="value"><h3>Made daily</h3><p>Nothing frozen, nothing reheated.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Kind words</span>
+        <h2>The neighbors are talking.</h2>
+        <p>Sample reviews for this concept design.</p>
+      </div>
+      <div class="reviews">
+        <figure class="review reveal"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>The country loaf has ruined supermarket bread for me forever.</blockquote><cite>— Sample review</cite></figure>
+        <figure class="review reveal"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>Best cardamom bun in town, and the flat white is spot on.</blockquote><cite>— Sample review</cite></figure>
+        <figure class="review reveal"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>Ordered a birthday tart online — ready on time and gorgeous.</blockquote><cite>— Sample review</cite></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap visit-grid">
+      <div class="reveal">
+        <span class="eyebrow">Visit us</span>
+        <h2 style="font-size:clamp(2rem,4vw,3rem);margin:.6rem 0 1.6rem">Come early. We sell out.</h2>
+        <ul class="hours" id="hours"></ul>
+        <div class="contact-lines">
+          <div><strong>Address:</strong> 12 Mill Lane (sample address)</div>
+          <div><strong>Phone:</strong> +00 000 000 000</div>
+          <div><strong>Email:</strong> hello@example.com</div>
+        </div>
+      </div>
+      <form id="order-form" class="reveal" novalidate>
+        <h3>Reserve for pick-up</h3>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:-.4rem">Tell us what you'd like and we'll set it aside.</p>
+        <div class="row">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required><span class="error"></span></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><span class="error"></span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="item">Item</label>
+            <select id="item" name="item" required><option value="">Choose…</option></select><span class="error"></span></div>
+          <div class="field"><label for="date">Pick-up date</label><input id="date" name="date" type="date" required><span class="error"></span></div>
+        </div>
+        <div class="field"><label for="note">Notes (optional)</label><textarea id="note" name="note" rows="3" placeholder="Sliced? Gift wrap?"></textarea></div>
+        <button class="btn btn-primary" type="submit" style="justify-self:start">Reserve my order</button>
+        <div class="success" id="success" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year"></span> Brindle Bakehouse</span>
+    <span>Concept project — fictional business, designed & built as a portfolio sample.</span>
+  </div>
+</footer>
+
+<script>
+  const MENU = [
+    {name:"Country Sourdough", price:"$8", cat:"bread", desc:"36-hour ferment, crackly crust, open crumb.", tag:"Bestseller"},
+    {name:"Seeded Rye", price:"$9", cat:"bread", desc:"Dense, nutty, packed with sunflower & flax.", tag:"Vegan"},
+    {name:"Olive & Rosemary Focaccia", price:"$6", cat:"bread", desc:"Olive oil–rich, dimpled, flaky salt on top.", tag:"Vegan"},
+    {name:"Butter Croissant", price:"$4", cat:"pastry", desc:"Three days of lamination, 27 golden layers.", tag:"Bestseller"},
+    {name:"Cardamom Bun", price:"$4.5", cat:"pastry", desc:"Scandinavian-style knot, sugar-crusted.", tag:"Seasonal"},
+    {name:"Seasonal Fruit Tart", price:"$6", cat:"pastry", desc:"Almond frangipane with this week's fruit.", tag:"Seasonal"},
+    {name:"Flat White", price:"$3.8", cat:"coffee", desc:"Double ristretto, velvety whole milk.", tag:"House blend"},
+    {name:"Filter of the Day", price:"$3", cat:"coffee", desc:"Rotating single-origin, brewed by the cup.", tag:"Single origin"}
+  ];
+
+  const grid = document.getElementById('menu-grid');
+  const select = document.getElementById('item');
+  grid.innerHTML = MENU.map(m => `
+    <article class="item" data-cat="${m.cat}">
+      <div class="item-top"><h3>${m.name}</h3><span class="price">${m.price}</span></div>
+      <p>${m.desc}</p><span class="tag">${m.tag}</span>
+    </article>`).join('');
+  MENU.forEach(m => select.insertAdjacentHTML('beforeend', `<option>${m.name}</option>`));
+
+  // Menu filter tabs
+  document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t === tab));
+    const f = tab.dataset.filter;
+    grid.querySelectorAll('.item').forEach(el => el.hidden = f !== 'all' && el.dataset.cat !== f);
+  }));
+
+  // Mobile nav
+  const toggle = document.querySelector('.menu-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Header shadow on scroll
+  const header = document.querySelector('header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 10), {passive:true});
+
+  // Opening hours with "today" highlight
+  const HOURS = [["Monday","Closed"],["Tuesday","6:30 – 15:00"],["Wednesday","6:30 – 15:00"],["Thursday","6:30 – 15:00"],["Friday","6:30 – 16:00"],["Saturday","7:00 – 16:00"],["Sunday","7:00 – 13:00"]];
+  const todayIdx = (new Date().getDay() + 6) % 7;
+  document.getElementById('hours').innerHTML = HOURS.map((h,i) =>
+    `<li class="${i===todayIdx?'today':''}"><span>${h[0]}${i===todayIdx?' · today':''}</span><span>${h[1]}</span></li>`).join('');
+
+  // Form validation (demo — no data is sent)
+  const form = document.getElementById('order-form');
+  const dateInput = document.getElementById('date');
+  dateInput.min = new Date().toISOString().split('T')[0];
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let ok = true;
+    form.querySelectorAll('[required]').forEach(input => {
+      const field = input.closest('.field');
+      let msg = '';
+      if (!input.value.trim()) msg = 'This field is required.';
+      else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) msg = 'Please enter a valid email.';
+      field.classList.toggle('invalid', !!msg);
+      field.querySelector('.error').textContent = msg;
+      if (msg) ok = false;
+    });
+    if (!ok) return;
+    const s = document.getElementById('success');
+    s.textContent = `Thanks, ${form.name.value.trim()}! Your ${form.item.value} is reserved. (Demo form — nothing was sent.)`;
+    s.classList.add('show');
+    form.reset();
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+  }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
